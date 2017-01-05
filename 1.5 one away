@@ -1,0 +1,25 @@
+'''
+1.5 one away
+given two strings, write a function to heck if they are one edit (or zero edits) away.
+'''
+
+def one_away(str_a, str_b):
+    char_array_a = [0]*26
+    char_array_b = [0]*26
+
+    for char in str_a:
+        char_array_a[ord(char)-97]+=1    
+    for char in str_b:
+        char_array_b[ord(char)-97]+=1
+
+    tot_dist=0
+    for i in range(0,26):
+        tot_dist += abs(char_array_a[i]-char_array_b[i])
+    if tot_dist > 2:
+        return False
+    return True
+
+print one_away('pale', 'ple')
+print one_away('pales', 'pale')
+print one_away('pale', 'bale')
+print one_away('pale', 'bake')

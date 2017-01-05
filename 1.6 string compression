@@ -1,0 +1,27 @@
+'''
+1.6 string compression
+compress a string using the counts of repeated chars
+ex. aabcccccaaa becomes a2b1c5a3
+if the compressed string is not smaller return the original string
+the strings only contain upper and lowercase letters (a-z)
+'''
+
+def compress(input_str):
+    cur_char = -1
+    cur_char_count = 0
+    compressed_str = ''
+    for char in input_str:
+        if char != cur_char:
+            if cur_char != -1:
+                compressed_str += cur_char + str(cur_char_count)
+            cur_char = char
+            cur_char_count = 1
+        else:
+            cur_char_count += 1
+    compressed_str += cur_char + str(cur_char_count)
+    if len(compressed_str) < len(input_str):
+        return compressed_str
+    return input_str
+
+print compress('aabcccccaaa')
+print compress('abcdefghijklmnopqrstuvwxyz')

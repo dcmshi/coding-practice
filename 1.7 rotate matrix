@@ -1,0 +1,57 @@
+'''
+1.7 rotate matrix
+given an NxN matrix, write a method to rotate the image by 90 degrees
+can you do it in place?
+'''
+
+def rotate_mat(mat):
+    new_mat = []
+    for i in range(len(mat)):
+        row = []
+        for j in range(len(mat)):
+            row.append(0)
+        new_mat.append(row)
+
+    for i in range(len(mat)):
+        for j in range(len(mat)):
+            new_mat[j][len(mat)-i-1] = mat[i][j]
+    return new_mat
+
+mat = [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i']]
+print rotate_mat(mat)
+
+def rotate_mat_inplace(mat):
+    if len(mat)%2 == 0:
+        for i in range(0, len(mat)/2):
+            for j in range(0, len(mat)/2):
+                mat[i][j],
+                mat[j][len(mat)-i-1],
+                mat[len(mat)-i-1][len(mat)-j-1],
+                mat[j][i] = \
+                mat[j][len(mat)-i-1],
+                mat[len(mat)-i-1][len(mat)-j-1],
+                mat[j][i],
+                mat[i][j]
+    else:
+        for i in range(0, len(mat)/2+1):
+            for j in range(0, len(mat)/2):
+                (top_left,
+                top_right,
+                bottom_right,
+                bottom_left) = \
+                (mat[i][j],
+                mat[j][len(mat)-i-1],
+                mat[len(mat)-i-1][len(mat)-j-1],
+                mat[len(mat)-j-1][i])
+                
+                print top_left, top_right, bottom_right, bottom_left
+                mat[len(mat)-j-1][i],
+                mat[i][j],
+                mat[j][len(mat)-i-1],
+                mat[len(mat)-j-1][i] = \
+                top_left, top_right, bottom_right, bottom_left
+
+print mat              
+rotate_mat_inplace(mat)
+print mat
+
