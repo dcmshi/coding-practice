@@ -1,0 +1,88 @@
+'''
+2.5 sum lists
+give two numbers represented by linked lists, each node contains a single digit
+digits are stored in reverse order, write a function that adds the two numbers
+and returns the result as a linked list
+now suppose digits are stored in forward order, do it again
+'''
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+    def push(self, data):
+        tempHead = self
+        while tempHead.next != None:
+            tempHead = tempHead.next
+        tempHead.next = Node(data)
+
+    def printList(self):
+        printString = ""
+        tempHead = self
+        while tempHead != None:
+            printString += str(tempHead.data) + "->"
+            tempHead = tempHead.next
+        printString += "None"
+        print printString
+
+def llistSum(llist1, llist2):
+    tempHead1 = llist1
+    tempHead2 = llist2
+
+    newList = None
+    newListHead = None
+    carryOver = 0
+
+    while tempHead1 and tempHead2:
+        if tempHead1 == None:
+            digitSum = tempHead2.data + carryOver
+            if digitSum > 9:
+                carryOver = digitSum/10
+                digitSum = digitSum%10
+                if newListHead == None:
+                    newList = Node(digitSum)
+                    newListHead = newList
+                else:
+                    newList.next = Node(digitSum)
+                    newList = newList.next
+            tempHead2 = tempHead2.next
+        elif tempHead2 == None:
+            digitSum = tempHead1.data + carryOver
+            if digitSum > 9:
+                carryOver = digitSum/10
+                digitSum = digitSum%10
+                if newListHead == None:
+                    newList = Node(digitSum)
+                    newListHead = newList
+                else:
+                    newList.next = Node(digitSum)
+                    newList = newList.next
+            tempHead1 = tempHead1.next
+        else:
+            digitSum = tempHead1.data + tempHead2.data + carryOver
+            if digitSum > 9:
+                carryOver = digitSum/10
+                digitSum = digitSum%10
+                if newListHead == None:
+                    newList = Node(digitSum)
+                    newListHead = newList
+                else:
+                    newList.next = Node(digitSum)
+                    newList = newList.next
+            tempHead1 = tempHead1.next
+            tempHead2 = tempHead2.next
+    if carryOver != 0:
+        newList.next = Node(carryOver)
+
+    return newListHead
+
+
+llist1 = Node(7)
+llist1.push(1)
+llist1.push(6)
+llist2 = Node(5)
+llist2.push(9)
+llist2.push(2)
+
+llistSum(llist1, llist2).printList()

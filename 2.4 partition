@@ -1,0 +1,72 @@
+'''
+2.4 partition
+partition a linked list around a certain value
+'''
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+    def push(self, data):
+        tempHead = self
+        while tempHead.next != None:
+            tempHead = tempHead.next
+        tempHead.next = Node(data)
+
+    def printList(self):
+        printString = ""
+        tempHead = self
+        while tempHead != None:
+            printString += str(tempHead.data) + "->"
+            tempHead = tempHead.next
+        printString += "None"
+        print printString
+
+def partition(node, val):
+    leftList = None
+    rightList = None
+    midList = None
+
+    tempHead = node
+    while tempHead != None:
+        if tempHead.data < val:
+            if leftList == None:
+                leftList = Node(tempHead.data)
+            else:
+                leftList.push(tempHead.data)
+        elif tempHead.data == val:
+            if midList == None:
+                midList = Node(tempHead.data)
+            else:
+                midList.push(tempHead.data)
+        else:
+            if rightList == None:
+                rightList = Node(tempHead.data)
+            else:
+                rightList.push(tempHead.data)
+        tempHead = tempHead.next
+
+    tempHead = leftList
+    while tempHead.next != None:
+        tempHead = tempHead.next
+    tempHead.next = midList
+
+    tempHead = midList
+    while tempHead.next != None:
+        tempHead = tempHead.next
+    tempHead.next = rightList
+    return leftList
+
+
+llist = Node(3)
+llist.push(5)
+llist.push(8)
+llist.push(5)
+llist.push(10)
+llist.push(2)
+llist.push(1)
+
+llist.printList()
+
+partition(llist, 5).printList()

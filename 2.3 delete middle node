@@ -1,0 +1,41 @@
+'''
+2.3 delete middle node
+given access to a node delete it from a linked list
+'''
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+    def push(self, data):
+        tempHead = self
+        while tempHead.next != None:
+            tempHead = tempHead.next
+        tempHead.next = Node(data)
+
+    def printList(self):
+        printString = ""
+        tempHead = self
+        while tempHead != None:
+            printString += str(tempHead.data) + "->"
+            tempHead = tempHead.next
+        printString += "None"
+        print printString
+
+def delete(node):
+    if node.next == None:
+        node = None
+    else:
+        node.data = node.next.data
+        node.next = node.next.next
+
+
+llist = Node(1)
+toDelete = Node(2)
+llist.next = toDelete
+llist.push(3)
+llist.printList()
+
+delete(toDelete)
+llist.printList

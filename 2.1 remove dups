@@ -1,0 +1,34 @@
+class LinkedList:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+    
+    def printList(self):
+        tempHead = self
+        printStr = ""
+        while tempHead != None:
+            printStr += str(tempHead.data) + "->"
+            tempHead = tempHead.next
+        printStr += "None"
+        print printStr
+
+def removeDups(llist):
+    tempHead = llist
+    seen = set()
+    
+    while tempHead != None:
+        seen.add(tempHead.data)
+        if tempHead.next.data in seen:
+            tempHead.next = tempHead.next.next
+        tempHead = tempHead.next
+
+    return llist
+
+llist = LinkedList(5)
+llist2 = LinkedList(2)
+llist3 = LinkedList(2)
+llist3 = LinkedList(2)
+llist.next = llist2
+llist2.next = llist3
+
+removeDups(llist).printList()

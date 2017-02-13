@@ -1,0 +1,12 @@
+'''
+1.9 String Rotation
+assume you have a method isSubstring which checks if a string is a substring of another
+Given two strings s1 and s2, write a function to check if s2 is a rotation of s1
+using only one call to isSubstring
+'''
+
+def isRotation(s1, s2):
+    double = s1 + s1
+    if isSubstring(double, s2):
+        return True
+    return False

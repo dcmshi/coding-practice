@@ -1,0 +1,49 @@
+'''
+2.2 return kth to last
+return the kth last node in a linked list
+'''
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+    def push(self, data):
+        tempHead = self
+        while tempHead.next != None:
+            tempHead = tempHead.next
+        tempHead.next = Node(data)
+
+    def printList(self):
+        printString = ""
+        tempHead = self
+        while tempHead != None:
+            printString += str(tempHead.data) + "->"
+            tempHead = tempHead.next
+        printString += "None"
+        print printString
+
+
+def findLength(node):
+    llistLength = 0
+    tempHead = node
+    while tempHead != None:
+        llistLength += 1
+        tempHead = tempHead.next
+    return llistLength
+
+def returnKthLast(node, k):
+    howLong = findLength(node)
+    index = howLong - k
+    tempHead = node
+    for i in range(0, index):
+        tempHead = tempHead.next
+    return tempHead
+
+
+llist = Node(1)
+llist.push(2)
+llist.push(3)
+llist.printList()
+
+print returnKthLast(llist, 2).data
